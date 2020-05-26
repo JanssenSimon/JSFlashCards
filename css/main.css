@@ -1,0 +1,76 @@
+body {
+    background-color: #A0CED9;
+    margin: 5px;
+}
+
+#header {
+    color: #FFEAEC;
+    text-align: right;
+    width: 100%;
+    margin: 0px;
+}
+
+button {
+    /*credit goes to Allison Skinner for the button style*/
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+    /*Button Color & Border*/
+    border: 4px solid #79B0CD ;
+    color: #79B0CD;
+    background: #FFEAEC;
+    outline: none;
+    /*Position, Display, Size*/
+    position: relative;
+    display: inline-block;
+    padding: 15px 10px 14px;
+    cursor: pointer;
+    width: auto;
+}
+button:after {
+    /*Make a:after be as big as button*/
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /*Give a:after Border & Background color*/
+    border: 2px solid #79B0CD;
+    background-color: #79B0CD;
+    /*Decide Location of a:after..this gives a bottom right shadow*/
+    left: 4px;
+    top: 4px;
+    /*Place a:after behind button*/
+    z-index: -1;
+    content: '';
+    /*Animation/Transition Speed*/
+    -webkit-transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -o-transition: all 0.5s;        
+}
+button:hover {
+    top:2px;
+    left:2px;
+}
+button:hover:after {
+    top: -2px;
+    left: -2px;
+}
+
+#flashcard {
+    margin: 0px;
+    text-align: center;
+}
+
+input[type="textbox"] {
+    background-color: transparent;
+    /*background-color: #FCF5C7;*/
+    color: #5B5B5B;
+    border: none;
+    outline: none;
+}
+
+#textbox {
+    height: 66%;
+    width: 66%;
+}

@@ -8,17 +8,22 @@
     <meta name="description" content="A simple webapp for flashcards.">
     <meta name="author" content="Simon Janssen">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
     <script src="scripts/script.js"></script>
 
-    <input type="button">🔀 Shuffle</input>
-    <input type="button">➕ New Card</input>
-    <input type="button">🗑 Delete Card</input>
+    <div id="header">
+        <button id="shuffle-button">Shuffle</button> <!--🔀 -->
+        <button id="new-button">New Card</button> <!--➕ -->
+        <button id="del-button">Delete  Card</button> <!--🗑 -->
+    </div>
 
-    <input type="text">enter text</input>
-    <input type="text">enter guess</input>
+    <div id="flashcard">
+        <input type="text" id="textbox" placeholder="enter text"><br></input>
+        <input type="text" id="subtextbox" placeholder="enter subtext"><br></input>
+        <input type="text" id="guess-textbox" placeholder="enter guess"><br></input>
+    </div>
 </body>
 </html>
