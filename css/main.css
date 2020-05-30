@@ -90,6 +90,8 @@ input[type="textbox"] {
 }
 
 #guess-textbox {
+    /*color: #79B0CD;*/
+    /*color: #FFEAEC;*/
     color: #5B5B5B;
     background: transparent;
     outline: none; 
