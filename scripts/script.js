@@ -32,16 +32,13 @@ var currentCardPosition = 0;
 //Create an array of flashcards
 //TODO if no array already exists in file
 var flashCardStack = [{'recto' : "", 'verso' : ""}];
-var flipCard = function () {
-    isOnRecto = !isOnRecto;
-}
 
 var textbox = document.getElementById("textbox");
 
 //Store textarea into array
 var storeContents = function () {   //TODO maybe sanitize this?
     if (isOnRecto) {
-        flashCardStack[currentCardPosition].recto = textbox.value;
+        flashCardStack[currentCardPosition].recto = textbox.value; 
         console.log("Recto value stored in array");
     }else{
         flashCardStack[currentCardPosition].verso = textbox.value;
@@ -59,13 +56,63 @@ var getContents = function () {
     }
 }
 
+//FlipCard
+var flipCard = function () {
+    storeContents();
+    isOnRecto = !isOnRecto;
+    getContents();
+}
+//NextCard
+var nextCard = function () {
+    storeContents();
+    if (currentCardPosition < flashCardStack.length - 1) {
+        currentCardPosition++;
+    } else {
+        currentCardPosition = 0;
+    }
+    getContents();
+}
+//PrevCard
+var prevCard = function () {
+    storeContents();
+    if (currentCardPosition > 0) {
+        currentCardPosition--;
+    } else {
+        currentCardPosition = flashCardStack.length - 1;
+    }
+    getContents();
+}
+
 //Create new flashcards
-var newFlashCard() {
+var newFlashCard = function () {
+    storeContents();
     flashCardStack.push({'recto' : "", 'verso' : ""});
     currentCardPosition = flashCardStack.length - 1;
     getContents();
+    console.log("New Card Created")
 }
 //Delete flashcard
-//TODO
+var delFlashCard = function () {
+    if(flashCardStack.length > 1) {
+        flashCardStack.splice(currentCardPosition, 1);
+        if(currentCardPosition >= flashCardStack.length)
+            currentCardPosition = flashCardStack.length - 1;
+    }else{
+        flashCardStack = [{'recto' : "", 'verso' : ""}];
+        currentCardPosition = 0;
+    }
+    getContents();
+    console.log("Deleted Card");
+}
+//Shuffle Cards
+var shuffleCards = function () {
+    storeContents();
+    flashCardStack.sort(() => Math.random() - 0.5);
+    getContents();
+    console.log("Shuffled Cards");
+}
 
-textbox.onchange = storeContents()
+textbox.addEventListener("change", storeContents);
+document.getElementById("shuffle-button").addEventListener("click", shuffleCards);
+document.getElementById("new-button").addEventListener("click", newFlashCard);
+document.getElementById("del-button").addEventListener("click", delFlashCard);
