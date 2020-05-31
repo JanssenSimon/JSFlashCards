@@ -23,3 +23,49 @@ var height = 370 + 40;
 context.rect(x, y, width, height);
 context.fillStyle = '#FCF5C7';
 context.fill();
+
+
+//Store current state of cards
+var isOnRecto = true;
+var currentCardPosition = 0;
+
+//Create an array of flashcards
+//TODO if no array already exists in file
+var flashCardStack = [{'recto' : "", 'verso' : ""}];
+var flipCard = function () {
+    isOnRecto = !isOnRecto;
+}
+
+var textbox = document.getElementById("textbox");
+
+//Store textarea into array
+var storeContents = function () {   //TODO maybe sanitize this?
+    if (isOnRecto) {
+        flashCardStack[currentCardPosition].recto = textbox.value;
+        console.log("Recto value stored in array");
+    }else{
+        flashCardStack[currentCardPosition].verso = textbox.value;
+        console.log("Verso value stored in array");
+    }
+}
+//Get the contents stored in the array and display them
+var getContents = function () {
+    if (isOnRecto) {
+        textbox.value = flashCardStack[currentCardPosition].recto;
+        console.log("Recto value fetched from array");
+    }else{
+        textbox.value = flashCardStack[currentCardPosition].verso;
+        console.log("Verso value fetched from array");
+    }
+}
+
+//Create new flashcards
+var newFlashCard() {
+    flashCardStack.push({'recto' : "", 'verso' : ""});
+    currentCardPosition = flashCardStack.length - 1;
+    getContents();
+}
+//Delete flashcard
+//TODO
+
+textbox.onchange = storeContents()
