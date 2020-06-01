@@ -29,10 +29,8 @@ context.fill();
 var isOnRecto = true;
 var currentCardPosition = 0;
 
-//Create an array of flashcards
-//TODO if no array already exists in file
-var flashCardStack = [{'recto' : "", 'verso' : ""}];
 
+var flashCardStack;
 var textbox = document.getElementById("textbox");
 
 //Store textarea into array
@@ -44,6 +42,7 @@ var storeContents = function () {   //TODO maybe sanitize this?
         flashCardStack[currentCardPosition].verso = textbox.value;
         console.log("Verso value stored in array");
     }
+    localStorage.setItem('flashCardStack', JSON.stringify(flashCardStack));
 }
 //Get the contents stored in the array and display them
 var getContents = function () {
@@ -54,6 +53,16 @@ var getContents = function () {
         textbox.value = flashCardStack[currentCardPosition].verso;
         console.log("Verso value fetched from array");
     }
+}
+
+//Create an array of flashcards
+storedStack = JSON.parse(localStorage.getItem('flashCardStack'));
+console.log(storedStack);
+if(storedStack == null || storedStack == undefined || storedStack.length < 1) {
+    flashCardStack = [{'recto' : "", 'verso' : ""}];
+}else{
+    flashCardStack = storedStack;
+    getContents();
 }
 
 //FlipCard
@@ -90,6 +99,7 @@ var newFlashCard = function () {
     currentCardPosition = flashCardStack.length - 1;
     getContents();
     console.log("New Card Created")
+    storeContents();
 }
 //Delete flashcard
 var delFlashCard = function () {
@@ -103,6 +113,7 @@ var delFlashCard = function () {
     }
     getContents();
     console.log("Deleted Card");
+    storeContents();
 }
 //Shuffle Cards
 var shuffleCards = function () {
@@ -110,6 +121,7 @@ var shuffleCards = function () {
     flashCardStack.sort(() => Math.random() - 0.5);
     getContents();
     console.log("Shuffled Cards");
+    storeContents();
 }
 
 textbox.addEventListener("change", storeContents);
