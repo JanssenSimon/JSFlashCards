@@ -128,3 +128,27 @@ textbox.addEventListener("change", storeContents);
 document.getElementById("shuffle-button").addEventListener("click", shuffleCards);
 document.getElementById("new-button").addEventListener("click", newFlashCard);
 document.getElementById("del-button").addEventListener("click", delFlashCard);
+
+//Temporary Keyboard Buttons
+//TODO complement these with intuitive clicks on screen
+//TODO add pretty animations
+document.addEventListener('keydown', (event) => {
+    if ( !(document.activeElement === textbox) ) {
+        const keyName = event.code;
+
+        if ( keyName === 'ArrowRight' ) {
+            nextCard();
+            return;
+        }
+
+        if ( keyName === 'ArrowLeft' ) {
+            prevCard();
+            return;
+        }
+
+        if ( keyName === 'Space' ) {
+            flipCard();
+            return;
+        }
+    }
+}, false);
