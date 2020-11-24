@@ -1,6 +1,8 @@
 # JSFlashCards
 Program for my brother that will allow him to make flashcards in his browser
 
+![A screen capture of the webapp.](screenshot.jpg)
+
 Controls
 --------
 Space - Toggle wether looking at Recto or Verso of cards
